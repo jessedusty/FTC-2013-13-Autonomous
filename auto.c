@@ -115,17 +115,60 @@ void moveSideways(int inches) {
 		holomic(0,0);
 }
 
+void turnRight(int amount) {
+		nonholomic(50,-50);
+		wait1Msec(amount * 75);
+		nonholomic(0,0);
+}
+void turnLeft(int amount) {
+		nonholomic(50,50);
+		wait1Msec(amount * 75);
+		nonholomic(0,0);
+}
+
+void driveOnBridge() {
+
+	moveForward(40);
+	wait1Msec(700);
+	turnLeft(15);
+	wait1Msec(700);
+	moveForward(30);
+}
+
+void putBlock() {
+
+	turnLeft(15);
+	wait1Msec(700);
+	moveForward(17);
+	motor[liftMotor] = -50;
+	servo[upperLiftMotor] = 0;
+	wait1Msec(2500);
+	servo[upperLiftMotor] = 122;
+	motor[liftMotor] = 0;
+	servo[trayTiltMotor] = 110;
+	wait1Msec(3000);
+	servo[trayTiltMotor] = 189;
+	motor[liftMotor] = 30;
+	wait1Msec(2500);
+	motor[liftMotor] = 0;
+	moveBackward(10);
+	wait1Msec(200);
+	moveSideways(20);
+	wait1Msec(200);
+	moveForward(30);
+	wait1Msec(200);
+
+}
 
 task main()
 {
 	initializeRobot();
 
 	waitForStart();
-
-	moveForward(24);
-	wait1Msec(700);
-	moveSideways(10);
-	wait1Msec(200);
-	moveBackward(24);
+	//putBlock();
+	driveOnBridge();
+	//moveSideways(10);
+	//wait1Msec(200);
+	//moveBackward(24);
 
 }
